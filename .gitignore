@@ -2,3 +2,12 @@
 node_modules
 npm-debug.log
 dist
+
+/bower_components/
+/node_modules/
+/.pulp-cache/
+/output/
+/.psci*
+
+.tern-port
+/flycheck_output/

@@ -1,7 +1,7 @@
 {
-  "name": "react-transform-boilerplate",
+  "name": "redux-purescript-example",
   "version": "1.0.0",
-  "description": "A new Webpack boilerplate with hot reloading React components, and error handling on module and component level.",
+  "description": "Webpack boilerplate/example demonstrating Redux+PureScript integration with hot reloading.",
   "scripts": {
     "clean": "rimraf dist",
     "build:webpack": "cross-env NODE_ENV=production webpack --config webpack.config.prod.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gaearon/react-transform-boilerplate.git"
+    "url": "https://github.com/osener/redux-purescript-example.git"
   },
   "keywords": [
     "react",
@@ -24,34 +24,53 @@
     "edit",
     "webpack",
     "babel",
-    "react-transform"
+    "react-transform",
+    "purescript",
+    "redux"
   ],
-  "author": "Dan Abramov <dan.abramov@me.com> (http://github.com/gaearon)",
+  "author": "Ozan Sener <ozan@ozansener.com> (https://github.com/osener)",
   "license": "CC0-1.0",
+  "private": true,
   "bugs": {
-    "url": "https://github.com/gaearon/react-transform-boilerplate/issues"
+    "url": "https://github.com/osener/redux-purescript-example/issues"
   },
-  "homepage": "https://github.com/gaearon/react-transform-boilerplate",
+  "homepage": "https://github.com/osener/redux-purescript-example",
   "devDependencies": {
-    "babel-core": "^6.6.5",
-    "babel-eslint": "^5.0.0-beta4",
+    "@osener/redux-devtools-log-monitor": "^1.0.1",
+    "babel-core": "^6.7.2",
+    "babel-eslint": "^5.0.0",
     "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.3.13",
-    "babel-preset-react": "^6.3.13",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.3.13",
     "cross-env": "^1.0.7",
-    "eslint": "^1.10.3",
-    "eslint-plugin-babel": "^3.0.0",
-    "eslint-plugin-react": "^3.11.3",
+    "eslint": "^2.4.0",
+    "eslint-config-standard": "^5.1.0",
+    "eslint-config-standard-jsx": "^1.1.1",
+    "eslint-config-standard-react": "^2.3.0",
+    "eslint-plugin-babel": "^3.1.0",
+    "eslint-plugin-promise": "^1.1.0",
+    "eslint-plugin-react": "^4.2.3",
+    "eslint-plugin-standard": "^1.3.2",
+    "estraverse-fb": "^1.3.1",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.13.3",
+    "purescript-webpack-plugin": "^0.1.1",
+    "purs-loader": "^0.5.0",
+    "redux-devtools": "^3.0.1",
+    "redux-devtools-dock-monitor": "^1.0.1",
+    "redux-logger": "^2.3.2",
     "rimraf": "^2.4.3",
-    "webpack": "^1.12.9",
+    "webpack": "^1.12.11",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.9.1"
   },
   "dependencies": {
     "react": "^0.14.7",
-    "react-dom": "^0.14.7"
+    "react-dom": "^0.14.7",
+    "react-redux": "^4.0.6",
+    "redux": "^3.3.1",
+    "redux-thunk": "^2.0.1"
   }
 }
