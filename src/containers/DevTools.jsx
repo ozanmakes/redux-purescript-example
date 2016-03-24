@@ -6,12 +6,7 @@ import { createDevTools } from "redux-devtools"
 // Monitors are separate packages, and you can make a custom one
 import LogMonitor from "redux-devtools-log-monitor"
 import DockMonitor from "redux-devtools-dock-monitor"
-
-function actionTransformer (action) {
-  var type = action.type.toString()
-
-  return { ...action, type }
-}
+import actionTransformer from "../store/actionTransformer"
 
 // createDevTools takes a monitor and produces a DevTools component
 const DevTools = createDevTools(

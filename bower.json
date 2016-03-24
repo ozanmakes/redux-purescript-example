@@ -15,6 +15,6 @@
     "purescript-maybe": "~0.3.5",
     "purescript-generics": "^0.7.2",
     "purescript-aff": "^0.16.1",
-    "purescript-redux-utils": "^0.1.0"
+    "purescript-redux-utils": "^0.2.0"
   }
 }
