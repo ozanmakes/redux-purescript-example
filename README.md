@@ -44,11 +44,15 @@ safety, or any boilerplate that can be abstracted away.
 
 * You can dispatch actions written in PureScript. These are defined using
   `Redux.Action.action` and `Redux.Action.asyncAction` utility functions found
-  in  [`purescript-redux-utils`](https://github.com/osener/purescript-redux-utils/tree/master/docs/Redux).
-  See `src/Actions.purs` for some examples.
- * You can write your reducers in PureScript. Use `Redux.Reducer.reducer`
-   utility function to define them (also from `purescript-redux-utils`). See
-   `src/Reducers.purs` for some examples.
+  in
+  [`purescript-redux-utils`](https://github.com/osener/purescript-redux-utils/tree/master/docs/Redux).
+  See
+  [`src/Actions.purs`](https://github.com/osener/redux-purescript-example/blob/master/src/Actions.purs)
+  for some examples.
+* You can write your reducers in PureScript. Use `Redux.Reducer.reducer` utility
+  function to define them (also from `purescript-redux-utils`). See
+  [`src/Reducers.purs`](https://github.com/osener/redux-purescript-example/blob/master/src/Reducers.purs)
+  for some examples.
 * Components are created using React and JSX.
 * Hot reloading and Redux devtools work like a charm.
 
