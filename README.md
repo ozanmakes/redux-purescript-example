@@ -1,7 +1,8 @@
 # Redux PureScript Example
 
-## About
+![tmpimg](https://cloud.githubusercontent.com/assets/111265/14006914/915b6cee-f17a-11e5-8a29-acae68539852.png)
 
+## About
 This project is a work-in-progress example/boilerplate demonstrating my attempt
 to write Redux reducers and actions in PureScript.
 
