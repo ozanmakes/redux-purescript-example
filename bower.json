@@ -13,8 +13,9 @@
   "dependencies": {
     "purescript-console": "^0.1.0",
     "purescript-maybe": "~0.3.5",
-    "purescript-generics": "^0.7.2",
     "purescript-aff": "^0.16.1",
+    "purescript-affjax": "^0.13.0",
+    "purescript-datetime": "^0.9.1",
     "purescript-redux-utils": "^0.2.0"
   }
 }

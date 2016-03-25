@@ -1,61 +1,102 @@
 import React, { Component, PropTypes } from "react"
 import { connect } from "react-redux"
-import Actions, { addTodo, completeTodo, setVisibilityFilter } from "../Actions"
-import AddTodo from "../components/AddTodo"
-import TodoList from "../components/TodoList"
-import Footer from "../components/Footer"
-import Counter from "../components/Counter"
+import { selectSubreddit, fetchPostsIfNeeded, invalidateSubreddit } from "../actions"
+import Picker from "../components/Picker"
+import Posts from "../components/Posts"
 
 class App extends Component {
-  render () {
-    // Injected by connect() call:
-    const { dispatch, visibleTodos, visibilityFilter, counter } = this.props
+  constructor(props) {
+    super(props)
+      this.handleChange = this.handleChange.bind(this)
+      this.handleRefreshClick = this.handleRefreshClick.bind(this)
+  }
+
+  componentDidMount() {
+    const { dispatch, selectedSubreddit } = this.props
+    dispatch(fetchPostsIfNeeded(selectedSubreddit))
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.selectedSubreddit !== this.props.selectedSubreddit) {
+      const { dispatch, selectedSubreddit } = nextProps
+      dispatch(fetchPostsIfNeeded(selectedSubreddit))
+    }
+  }
+
+  handleChange(nextSubreddit) {
+    this.props.dispatch(selectSubreddit(nextSubreddit))
+  }
+
+  handleRefreshClick(e) {
+    e.preventDefault()
+
+    const { dispatch, selectedSubreddit } = this.props
+    dispatch(invalidateSubreddit(selectedSubreddit))
+    dispatch(fetchPostsIfNeeded(selectedSubreddit))
+  }
+
+  render() {
+    const { selectedSubreddit, posts, isFetching, lastUpdated } = this.props
     return (
       <div>
-        <AddTodo
-          onAddClick={text =>
-            dispatch(addTodo(text))
-                     } />
-        <TodoList
-          todos={visibleTodos}
-          onTodoClick={id =>
-            dispatch(completeTodo(id))
-                      } />
-        <Footer
-          filter={visibilityFilter}
-          onFilterChange={nextFilter =>
-            dispatch(setVisibilityFilter(nextFilter))
-                         } />
-        <Counter
-          counter={counter}
-          increment={() => dispatch(Actions.increment(5))}
-          decrement={() => dispatch(Actions.decrementAsync(3))}
-        />
+        <Picker value={selectedSubreddit}
+                onChange={this.handleChange}
+                options={[ "reactjs", "purescript", "frontend" ]} />
+        <p>
+          {lastUpdated > 0 &&
+           <span>
+             Last updated at {new Date(lastUpdated).toLocaleTimeString()}.
+             {" "}
+           </span>
+          }
+           {!isFetching &&
+            <a href="#"
+               onClick={this.handleRefreshClick}>
+              Refresh
+            </a>
+           }
+        </p>
+        {isFetching && posts.length === 0 &&
+         <h2>Loading...</h2>
+        }
+         {!isFetching && posts.length === 0 &&
+          <h2>Empty.</h2>
+         }
+          {posts.length > 0 &&
+           <div style={{ opacity: isFetching ? 0.5 : 1 }}>
+             <Posts posts={posts} />
+           </div>
+          }
       </div>
     )
   }
 }
 
-function selectTodos (todos, filter) {
-  switch (filter) {
-  case Actions.showCompleted:
-    return todos.filter(todo => todo.completed)
-  case Actions.showActive:
-    return todos.filter(todo => !todo.completed)
-  default:
-    return todos
-  }
+App.propTypes = {
+  selectedSubreddit: PropTypes.string.isRequired,
+  posts: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  lastUpdated: PropTypes.number,
+  dispatch: PropTypes.func.isRequired
 }
 
-// Which props do we want to inject, given the global state?
-// Note: use https://github.com/faassen/reselect for better performance.
-function select (state) {
+function mapStateToProps(state) {
+  const { selectedSubreddit, postsBySubreddit } = state
+  const {
+    isFetching,
+    lastUpdated,
+    items: posts
+  } = postsBySubreddit[selectedSubreddit] || {
+    isFetching: true,
+    items: []
+  }
+
   return {
-    visibleTodos: selectTodos(state.todos, state.visibilityFilter),
-    visibilityFilter: state.visibilityFilter,
-    counter: state.counter
+    selectedSubreddit,
+    posts,
+    isFetching,
+    lastUpdated
   }
 }
 
-// Wrap the component to inject dispatch and state into it
-export default connect(select)(App)
+export default connect(mapStateToProps)(App)
