@@ -10,6 +10,7 @@ import Prelude
 import Control.Bind ((>=>))
 import Control.Monad.Reader.Trans (lift)
 import Control.Monad.Eff.Class (liftEff)
+import Control.Monad (when)
 
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
@@ -63,10 +64,9 @@ shouldFetchPosts state subreddit =
 fetchPostsIfNeeded subreddit =
   asyncAction $
   do state <- unsafeFromForeign <$> getState
-     if shouldFetchPosts state subreddit
-        then do dispatch $ action (RequestPosts subreddit)
-                result <- lift $ fetchPosts subreddit
-                case result of
-                  Just a -> dispatch (action a)
-                  Nothing -> pure unit
-        else return unit
+     when (shouldFetchPosts state subreddit) $
+       do dispatch $ action (RequestPosts subreddit)
+          result <- lift $ fetchPosts subreddit
+          case result of
+            Just a -> dispatch (action a)
+            Nothing -> pure unit
