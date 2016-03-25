@@ -1,6 +1,6 @@
 # Redux PureScript Example
 
-![tmpimg](https://cloud.githubusercontent.com/assets/111265/14006914/915b6cee-f17a-11e5-8a29-acae68539852.png)
+![screenshot](https://cloud.githubusercontent.com/assets/111265/14035960/09bcc846-f23d-11e5-8488-ebe573ba0790.png)
 
 ## About
 This project is a work-in-progress example/boilerplate demonstrating my attempt
