@@ -2,8 +2,19 @@ var path = require("path")
 var webpack = require("webpack")
 
 var PurescriptWebpackPlugin = require("purescript-webpack-plugin")
+
 var src = ["bower_components/purescript-*/src/**/*.purs", "src/**/*.purs"]
 var ffi = ["bower_components/purescript-*/src/**/*.js", "src/**/*FFI.js"]
+
+var purescriptWebpackPlugin = new PurescriptWebpackPlugin({
+  src: src,
+  ffi: ffi,
+  bundle: false,
+  psc: "psa",
+  pscArgs: {
+    sourceMaps: true
+  }
+})
 
 module.exports = {
   // or devtool: "eval" to debug issues with compiled output:
@@ -24,7 +35,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new PurescriptWebpackPlugin({ src, ffi })
+    purescriptWebpackPlugin
   ],
   resolve: {
     alias: {
