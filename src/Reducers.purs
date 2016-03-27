@@ -1,7 +1,4 @@
-module Reducers
-  ( postsBySubreddit
-  , selectedSubreddit
-  ) where
+module Reducers (rootReducer) where
 
 import Prelude
 
@@ -11,7 +8,7 @@ import Data.Foldable (maximum)
 import Data.StrMap as StrMap
 import Data.Time (Milliseconds(Milliseconds))
 
-import Redux.Reducer (ReduxReducer, Reducer, reducer)
+import Redux.Reducer (reducer, combineReducers)
 
 import Actions
 
@@ -29,13 +26,11 @@ posts (ReceivePosts _ xs receivedAt) state =
         ,didInvalidate = false
         ,items = xs
         ,lastUpdated = receivedAt}
-posts _ state = state
 
 postsBySubreddit = reducer r StrMap.empty
   where r a@(InvalidateSubreddit sub) state = updatePosts sub a state
         r a@(ReceivePosts sub _ _) state = updatePosts sub a state
         r a@(RequestPosts sub) state = updatePosts sub a state
-        r _ state = state
 
 updatePosts sub action state = StrMap.insert sub (posts action xs) state
   where xs = fromMaybe defaultPosts (StrMap.lookup sub state)
@@ -44,3 +39,7 @@ updatePosts sub action state = StrMap.insert sub (posts action xs) state
           ,didInvalidate: false
           ,items: []
           ,lastUpdated: Milliseconds 0.0}
+
+rootReducer =
+  combineReducers {postsBySubreddit
+                  ,selectedSubreddit}
