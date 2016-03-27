@@ -16,6 +16,6 @@
     "purescript-aff": "^0.16.1",
     "purescript-affjax": "^0.13.0",
     "purescript-datetime": "^0.9.1",
-    "purescript-redux-utils": "^0.2.0"
+    "purescript-redux-utils": "^0.3.0"
   }
 }
