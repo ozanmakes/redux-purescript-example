@@ -2,8 +2,8 @@ var path = require("path")
 var webpack = require("webpack")
 
 var PurescriptWebpackPlugin = require("purescript-webpack-plugin")
-var src = ["bower_components/purescript-*/src/**/*.purs", "src/**/*.purs"]
-var ffi = ["bower_components/purescript-*/src/**/*.js", "src/**/*FFI.js"]
+var src = ["bower_components/purescript-*/src/**/*.purs", "purs/**/*.purs"]
+var ffi = ["bower_components/purescript-*/src/**/*.js", "purs/**/*.js"]
 
 module.exports = {
   devtool: "source-map",

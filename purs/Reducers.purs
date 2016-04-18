@@ -3,8 +3,6 @@ module Reducers (rootReducer) where
 import Prelude
 
 import Data.Maybe (fromMaybe)
-import Data.Array ((:))
-import Data.Foldable (maximum)
 import Data.StrMap as StrMap
 import Data.Time (Milliseconds(Milliseconds))
 
