@@ -3,19 +3,6 @@ var webpack = require("webpack")
 
 var PurescriptWebpackPlugin = require("purescript-webpack-plugin")
 
-var src = ["bower_components/purescript-*/src/**/*.purs", "purs/**/*.purs"]
-var ffi = ["bower_components/purescript-*/src/**/*.js", "purs/**/*.js"]
-
-var purescriptWebpackPlugin = new PurescriptWebpackPlugin({
-  src: src,
-  ffi: ffi,
-  bundle: false,
-  psc: "psa",
-  pscArgs: {
-    sourceMaps: true
-  }
-})
-
 module.exports = {
   // or devtool: "eval" to debug issues with compiled output:
   devtool: "cheap-module-eval-source-map",
@@ -33,9 +20,28 @@ module.exports = {
     publicPath: "/dist/"
   },
   plugins: [
+    {
+      apply: function (compiler) {
+        compiler.plugin("should-emit", function(compilation) {
+          if (compilation.errors.length > 1)
+            compilation.errors = compilation.errors.filter(function (error) {
+              var message = error.message || error
+              return !~message.indexOf('PureScript compilation has failed.');
+            });
+        });
+      }
+    },
+    new PurescriptWebpackPlugin({
+      src: ["bower_components/purescript-*/src/**/*.purs", "purs/**/*.purs"],
+      ffi: ["bower_components/purescript-*/src/**/*.js", "purs/**/*.js"],
+      bundle: false,
+      psc: "psa",
+      pscArgs: {
+        sourceMaps: true
+      }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    purescriptWebpackPlugin
   ],
   resolve: {
     alias: {

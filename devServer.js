@@ -8,7 +8,23 @@ var compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
-  publicPath: config.output.publicPath
+  publicPath: config.output.publicPath,
+  watchOptions: {
+    poll: false,
+  },
+  stats: {
+    hash: false,
+    timings: false,
+    version: false,
+    assets: false,
+    errors: true,
+    colors: false,
+    chunks: false,
+    children: false,
+    cached: false,
+    modules: false,
+    chunkModules: false,
+  },
 }));
 
 app.use(require('webpack-hot-middleware')(compiler));
