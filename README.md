@@ -26,11 +26,11 @@ benefiting from the great tooling React and Redux ecosystem offers.**
   in
   [`purescript-redux-utils`](https://github.com/osener/purescript-redux-utils/tree/master/docs/Redux).
   See
-  [`src/Actions.purs`](https://github.com/osener/redux-purescript-example/blob/master/src/Actions.purs)
+  [`purs/Actions.purs`](https://github.com/osener/redux-purescript-example/blob/master/purs/Actions.purs)
   for some examples.
 * You can write your reducers in PureScript. Use `Redux.Reducer.reducer` utility
   function to define them (also from `purescript-redux-utils`). See
-  [`src/Reducers.purs`](https://github.com/osener/redux-purescript-example/blob/master/src/Reducers.purs)
+  [`purs/Reducers.purs`](https://github.com/osener/redux-purescript-example/blob/master/purs/Reducers.purs)
   for some examples.
 * Components are created using React and JSX.
 * Hot reloading and Redux devtools!

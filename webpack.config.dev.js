@@ -42,7 +42,7 @@ module.exports = {
       "redux-devtools-log-monitor": "@osener/redux-devtools-log-monitor"
     },
     extensions: ["", ".js", ".jsx", ".purs"],
-    modulesDirectories: ["node_modules", "bower_components"]
+    modulesDirectories: ["node_modules", "bower_components", "purs"]
   },
   module: {
     loaders: [{

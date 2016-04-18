@@ -31,7 +31,7 @@ module.exports = {
   ],
   resolve: {
     extensions: ["", ".js", ".jsx", ".purs"],
-    modulesDirectories: ["node_modules", "bower_components"]
+    modulesDirectories: ["node_modules", "bower_components", "purs"]
   },
   module: {
     loaders: [{
