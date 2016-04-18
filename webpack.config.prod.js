@@ -8,7 +8,7 @@ var ffi = ["bower_components/purescript-*/src/**/*.js", "purs/**/*.js"]
 module.exports = {
   devtool: "source-map",
   entry: [
-    "./src/index"
+    "./js/index"
   ],
   output: {
     path: path.join(__dirname, "dist"),
@@ -35,9 +35,9 @@ module.exports = {
   },
   module: {
     loaders: [{
-      test: /\.jsx?$/,
+      test: /\.js$/,
       loaders: ["babel"],
-      include: path.join(__dirname, "src")
+      include: path.join(__dirname, "js")
     }, {
       test: /\.purs$/,
       loaders: ["purs-loader"]
