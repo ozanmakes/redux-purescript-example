@@ -6,7 +6,7 @@ var PurescriptWebpackPlugin = require("purescript-webpack-plugin")
 module.exports = {
   devtool: "source-map",
   entry: [
-    "./js/index"
+    "./src/js/index"
   ],
   output: {
     path: path.join(__dirname, "dist"),
@@ -15,8 +15,8 @@ module.exports = {
   },
   plugins: [
     new PurescriptWebpackPlugin({
-      src: ["bower_components/purescript-*/src/**/*.purs", "purs/**/*.purs"],
-      ffi: ["bower_components/purescript-*/src/**/*.js", "purs/**/*.js"]
+      src: ["bower_components/purescript-*/src/**/*.purs", "src/purs/**/*.purs"],
+      ffi: ["bower_components/purescript-*/src/**/*.js", "src/purs/**/*.js"]
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.DefinePlugin({
@@ -31,14 +31,14 @@ module.exports = {
     })
   ],
   resolve: {
-    extensions: ["", ".js", ".jsx", ".purs"],
-    modulesDirectories: ["node_modules", "bower_components", "purs"]
+    extensions: ["", ".js", ".purs"],
+    modulesDirectories: ["node_modules", "bower_components", "src/purs"]
   },
   module: {
     loaders: [{
       test: /\.js$/,
       loaders: ["babel"],
-      include: path.join(__dirname, "js")
+      include: path.join(__dirname, "src", "js")
     }, {
       test: /\.purs$/,
       loaders: ["purs-loader"]

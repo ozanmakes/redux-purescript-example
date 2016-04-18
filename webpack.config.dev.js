@@ -12,7 +12,7 @@ module.exports = {
     // listen to code updates emitted by hot middleware:
     "webpack-hot-middleware/client",
     // your code:
-    "./js/index"
+    "./src/js/index"
   ],
   output: {
     path: path.join(__dirname, "dist"),
@@ -32,8 +32,8 @@ module.exports = {
       }
     },
     new PurescriptWebpackPlugin({
-      src: ["bower_components/purescript-*/src/**/*.purs", "purs/**/*.purs"],
-      ffi: ["bower_components/purescript-*/src/**/*.js", "purs/**/*.js"],
+      src: ["bower_components/purescript-*/src/**/*.purs", "src/purs/**/*.purs"],
+      ffi: ["bower_components/purescript-*/src/**/*.js", "src/purs/**/*.js"],
       bundle: false,
       psc: "psa",
       pscArgs: {
@@ -47,14 +47,14 @@ module.exports = {
     alias: {
       "redux-devtools-log-monitor": "@osener/redux-devtools-log-monitor"
     },
-    extensions: ["", ".js", ".jsx", ".purs"],
-    modulesDirectories: ["node_modules", "bower_components", "purs"]
+    extensions: ["", ".js", ".purs"],
+    modulesDirectories: ["node_modules", "bower_components", "src/purs"]
   },
   module: {
     loaders: [{
       test: /\.js$/,
       loaders: ["babel"],
-      include: path.join(__dirname, "js")
+      include: path.join(__dirname, "src", "js")
     }, {
       test: /\.purs$/,
       loaders: ["purs-loader"]
